@@ -6,20 +6,13 @@ district and exports a report for selecting defensible pilot areas.
 
 from pathlib import Path
 import pandas as pd
+from data_schema import load_orders
 
 DATA = Path("data/raw/delivery_orders.csv")
 OUT = Path("results")
 OUT.mkdir(exist_ok=True)
 
-df = pd.read_csv(DATA)
-required = ["date", "hour", "district", "order_count"]
-missing = [c for c in required if c not in df.columns]
-if missing:
-    raise ValueError(f"Missing required columns: {missing}")
-
-df["date"] = pd.to_datetime(df["date"], errors="coerce")
-df["hour"] = pd.to_numeric(df["hour"], errors="coerce")
-df = df.dropna(subset=["date", "hour", "district", "order_count"])
+df = load_orders(DATA)
 df["timestamp"] = df["date"] + pd.to_timedelta(df["hour"], unit="h")
 
 hourly = (
