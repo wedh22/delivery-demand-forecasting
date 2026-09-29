@@ -57,6 +57,12 @@ Same-hour realized average order value was excluded because it would risk target
 
 Lagged AOV added some signal to Random Forest on this restricted sample, but Linear Regression still performed better over the same evaluation period. These scores are not directly comparable with the full-period pilot because the available date range differs.
 
+## Cross-district robustness
+
+![Cross-district R² comparison](figures/cross_district_r2.svg)
+
+The same time-aware pipeline was evaluated in the five highest-coverage districts selected before model-score comparison. Random Forest was strongest in Dongjak-gu, Gwanak-gu, and Geumcheon-gu, while Linear Regression performed better in Yeongdeungpo-gu and Guro-gu. This argues for retaining both models rather than claiming one universally superior algorithm.
+
 ## Methodology
 - Aggregate to district × timestamp before modeling.
 - Measure observation coverage before selecting a pilot area.
