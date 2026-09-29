@@ -2,6 +2,7 @@
 from pathlib import Path
 import numpy as np
 import pandas as pd
+from data_schema import load_orders
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -20,8 +21,7 @@ def score(y, p):
         r2_score(y,p),
     )
 
-raw = pd.read_csv(RAW)
-raw["date"] = pd.to_datetime(raw["date"])
+raw = load_orders(RAW)
 raw["timestamp"] = raw["date"] + pd.to_timedelta(raw["hour"], unit="h")
 rows=[]
 
