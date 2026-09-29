@@ -30,7 +30,7 @@ model.fit(train[features], train["order_count"])
 test["prediction"] = model.predict(test[features])
 test["error"] = test["order_count"] - test["prediction"]
 test["abs_error"] = test["error"].abs()
-test.to_csv(OUT / "test_predictions.csv", index=False)
+test.to_csv(OUT / "dongjak_test_predictions.csv", index=False)
 
 # Actual vs predicted
 plt.figure(figsize=(12,4))
@@ -39,29 +39,29 @@ plt.plot(test["timestamp"], test["prediction"], label="Predicted", linewidth=1)
 plt.xlabel("Timestamp"); plt.ylabel("Orders")
 plt.title("Actual vs Predicted — Chronological Holdout")
 plt.legend(); plt.tight_layout()
-plt.savefig(FIG / "actual_vs_predicted.png", dpi=160)
+plt.savefig(FIG / "dongjak_actual_vs_predicted.png", dpi=160)
 plt.close()
 
 # Error by hour
 err_hour = test.groupby("hour", as_index=False)["abs_error"].mean()
-err_hour.to_csv(OUT / "mae_by_hour.csv", index=False)
+err_hour.to_csv(OUT / "dongjak_mae_by_hour.csv", index=False)
 plt.figure(figsize=(9,4))
 plt.bar(err_hour["hour"], err_hour["abs_error"])
 plt.xlabel("Hour"); plt.ylabel("Mean absolute error")
 plt.title("Holdout Error by Hour")
 plt.tight_layout()
-plt.savefig(FIG / "mae_by_hour.png", dpi=160)
+plt.savefig(FIG / "dongjak_mae_by_hour.png", dpi=160)
 plt.close()
 
 # Largest errors: retain them for diagnosis rather than silently deleting them.
 test.nlargest(25, "abs_error")[
     ["timestamp","order_count","prediction","error","abs_error"]
-].to_csv(OUT / "largest_errors.csv", index=False)
+].to_csv(OUT / "dongjak_largest_errors.csv", index=False)
 
 # Permutation importance on untouched holdout.
 pi = permutation_importance(
     model, test[features], test["order_count"],
-    scoring="neg_mean_absolute_error", n_repeats=20, random_state=42, n_jobs=-1
+    scoring="neg_mean_absolute_error", n_repeats=10, random_state=42, n_jobs=-1
 )
 importance = pd.DataFrame({
     "feature": features,
