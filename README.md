@@ -95,7 +95,8 @@ The project rebuilds the analysis from the original files, tightens the forecast
 │   └── README.md
 ├── docs/
 │   ├── missing_time_protocol.md
-│   └── model_diagnostics.md
+│   ├── model_diagnostics.md
+│   └── cross_district_validation.md
 ├── notebooks/
 │   ├── 01_data_preprocessing.md
 │   ├── 02_eda.md
@@ -105,12 +106,17 @@ The project rebuilds the analysis from the original files, tightens the forecast
 │   ├── pilot_baseline_results.md
 │   ├── weather_experiment_results.md
 │   ├── lagged_aov_experiment.md
+│   ├── cross_district_validation.md
+│   ├── cross_district_validation.csv
+│   ├── dongjak_holdout_diagnostics.md
 │   └── top5_coverage_summary.csv
 ├── src/
+│   ├── data_schema.py
 │   ├── coverage_audit.py
 │   ├── build_model_table.py
 │   ├── baseline_model.py
 │   ├── lagged_aov_experiment.py
+│   ├── cross_district_validation.py
 │   └── model_diagnostics.py
 ├── figures/
 ├── requirements.txt
@@ -129,11 +135,10 @@ Large raw datasets are not committed. Redistribution rights for legacy source fi
 6. The project does not currently support a defensible claim of an “optimal delivery fee.”
 
 ## Next steps
-- Generate holdout actual-vs-predicted and error diagnostics.
-- Calculate permutation importance on the frozen test period.
-- Inspect large-error timestamps without deleting difficult observations.
-- Test generalization across additional high-coverage districts.
+- Generate the full holdout actual-vs-predicted figure from exported test predictions.
+- Verify unresolved large-error timestamps against category-level source coverage.
+- Verify remaining legacy weather-field metadata before semantic interpretation.
 - Evaluate additional tree-based models only if they add methodological value.
 
 ## Status
-**Active 2026 rebuild.** The baseline pipeline and two controlled feature experiments are documented; model diagnostics and broader validation are in progress.
+**Active 2026 rebuild.** The baseline pipeline, controlled feature experiments, holdout diagnostics, and five-district robustness validation are documented. Remaining work focuses on source-level error investigation, final visualization, and reproducibility QC.
