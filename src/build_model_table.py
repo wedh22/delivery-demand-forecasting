@@ -6,15 +6,13 @@ coverage is acceptable for the pilot analysis.
 
 from pathlib import Path
 import pandas as pd
+from data_schema import load_orders
 
 RAW = Path("data/raw/delivery_orders.csv")
 OUT = Path("data/processed/model_table.csv")
-PILOT_DISTRICT = "REPLACE_AFTER_COVERAGE_AUDIT"
+PILOT_DISTRICT = "동작구"
 
-df = pd.read_csv(RAW)
-df["date"] = pd.to_datetime(df["date"], errors="coerce")
-df["hour"] = pd.to_numeric(df["hour"], errors="coerce")
-df = df.dropna(subset=["date", "hour", "district", "order_count"])
+df = load_orders(RAW)
 
 if PILOT_DISTRICT == "REPLACE_AFTER_COVERAGE_AUDIT":
     raise ValueError("Choose PILOT_DISTRICT from results/coverage_by_district.csv first.")
