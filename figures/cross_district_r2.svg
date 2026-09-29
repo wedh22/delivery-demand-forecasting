@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
+<style>text{font-family:Arial,sans-serif;fill:#222}.title{font-size:24px;font-weight:700}.label{font-size:15px}.small{font-size:13px}.grid{stroke:#ddd;stroke-width:1}.lin{fill:#5b8ff9}.rf{fill:#61dDAA}</style>
+<rect width="900" height="500" fill="white"/>
+<text x="450" y="38" text-anchor="middle" class="title">Cross-District Holdout R²</text>
+<text x="450" y="62" text-anchor="middle" class="small">Chronological 80/20 evaluation · identical lag-feature protocol</text>
+<line x1="150" y1="420" x2="850" y2="420" stroke="#333"/>
+<line x1="150" y1="100" x2="150" y2="420" stroke="#333"/>
+<line x1="150" y1="100" x2="850" y2="100" class="grid"/><text x="140" y="105" text-anchor="end" class="small">1.0</text>
+<line x1="150" y1="164" x2="850" y2="164" class="grid"/><text x="140" y="169" text-anchor="end" class="small">0.8</text>
+<line x1="150" y1="228" x2="850" y2="228" class="grid"/><text x="140" y="233" text-anchor="end" class="small">0.6</text>
+<line x1="150" y1="292" x2="850" y2="292" class="grid"/><text x="140" y="297" text-anchor="end" class="small">0.4</text>
+<line x1="150" y1="356" x2="850" y2="356" class="grid"/><text x="140" y="361" text-anchor="end" class="small">0.2</text>
+<!-- Dongjak -->
+<rect x="190" y="136.3" width="38" height="283.7" class="lin"/><rect x="230" y="127.8" width="38" height="292.2" class="rf"/>
+<text x="229" y="445" text-anchor="middle" class="label">Dongjak</text>
+<!-- Gwanak -->
+<rect x="320" y="144.8" width="38" height="275.2" class="lin"/><rect x="360" y="137.6" width="38" height="282.4" class="rf"/>
+<text x="359" y="445" text-anchor="middle" class="label">Gwanak</text>
+<!-- Yeongdeungpo -->
+<rect x="450" y="186.1" width="38" height="233.9" class="lin"/><rect x="490" y="226.0" width="38" height="194.0" class="rf"/>
+<text x="489" y="445" text-anchor="middle" class="label">Yeongdeungpo</text>
+<!-- Guro -->
+<rect x="580" y="147.0" width="38" height="273.0" class="lin"/><rect x="620" y="156.0" width="38" height="264.0" class="rf"/>
+<text x="619" y="445" text-anchor="middle" class="label">Guro</text>
+<!-- Geumcheon -->
+<rect x="710" y="160.2" width="38" height="259.8" class="lin"/><rect x="750" y="156.3" width="38" height="263.7" class="rf"/>
+<text x="749" y="445" text-anchor="middle" class="label">Geumcheon</text>
+<rect x="320" y="470" width="16" height="16" class="lin"/><text x="342" y="483" class="small">Linear</text>
+<rect x="430" y="470" width="16" height="16" class="rf"/><text x="452" y="483" class="small">Random Forest</text>
+</svg>
