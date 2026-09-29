@@ -10,13 +10,9 @@ from pathlib import Path
 import json
 import numpy as np
 import pandas as pd
-from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 DATA = Path("data/processed/model_table.csv")
 OUT = Path("results")
@@ -38,7 +34,7 @@ def metrics(y_true, y_pred):
 
 
 df = pd.read_csv(DATA, parse_dates=["timestamp"]).sort_values("timestamp")
-df = df.dropna(subset=[TARGET, "lag_24h", "lag_168h"]).copy()
+df = df.dropna(subset=[TARGET] + FEATURES).copy()
 
 # Chronological 80/20 split: future observations are never used for training.
 cut = int(len(df) * 0.8)
@@ -50,18 +46,9 @@ X_test, y_test = test[FEATURES], test[TARGET]
 # Naive baseline: yesterday at the same hour.
 results = {"Naive_24h": metrics(y_test, test["lag_24h"])}
 
-categorical = ["hour", "dayofweek", "month"]
-numeric = ["is_weekend", "lag_1h", "lag_24h", "lag_168h"]
-
-preprocess = ColumnTransformer([
-    ("cat", OneHotEncoder(handle_unknown="ignore"), categorical),
-    ("num", SimpleImputer(strategy="median"), numeric),
-])
-
-linear = Pipeline([
-    ("prep", preprocess),
-    ("model", LinearRegression()),
-])
+# Keep the feature representation identical to the frozen pilot:
+# calendar fields and exact timestamp lags are used as numeric predictors.
+linear = LinearRegression()
 linear.fit(X_train, y_train)
 results["LinearRegression"] = metrics(y_test, linear.predict(X_test))
 
