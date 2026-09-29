@@ -1,0 +1,8 @@
+feature,mae_increase_mean,mae_increase_std
+lag_1h,5.877866,0.098877
+lag_24h,1.944588,0.057463
+hour,0.921999,0.059923
+lag_168h,0.275942,0.018605
+dayofweek,0.136413,0.015472
+month,0.009174,0.009131
+is_weekend,0.008923,0.005009
