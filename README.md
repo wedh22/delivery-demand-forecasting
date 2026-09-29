@@ -57,6 +57,12 @@ Same-hour realized average order value was excluded because it would risk target
 
 Lagged AOV added some signal to Random Forest on this restricted sample, but Linear Regression still performed better over the same evaluation period. These scores are not directly comparable with the full-period pilot because the available date range differs.
 
+## What drives the Dongjak pilot?
+
+![Permutation importance](figures/permutation_importance.svg)
+
+Holdout permutation importance shows that the Random Forest relies most strongly on **one-hour lagged demand**, followed by **previous-day same-hour demand**. Calendar variables contribute less on this test period. These values describe predictive reliance only and should not be interpreted causally.
+
 ## Cross-district robustness
 
 ![Cross-district R² comparison](figures/cross_district_r2.svg)
